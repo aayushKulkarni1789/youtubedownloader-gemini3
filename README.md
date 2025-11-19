@@ -1,5 +1,8 @@
 # 📹 YouTube Video Downloader
 
+> [!NOTE]
+> This project was completely made by Opencode and Gemini 3 Pro. From installing the required packages, to writing the code, to literally making and pushing this code to a public repo (I did not even give it my github username), all the things were handled by the agent. This model is insane. The only human made part in this entire project is this note that you are reading at the moment.
+
 A modern, fast, and easy-to-use YouTube video downloader web application built with **FastAPI** and **Streamlit**.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
