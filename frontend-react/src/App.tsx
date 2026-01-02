@@ -1,34 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Header from './components/Header'
+import UrlInput from './components/UrlInput'
+import VideoPreview from './components/VideoPreview'
+import DownloadConfig from './components/DownloadConfig'
+import DownloadProgress from './components/DownloadProgress'
+import SaveButton from './components/SaveButton'
+import { useAppStore } from './store'
+import { useVideoInfo, useDownload, useProgress } from './hooks'
+import type { MediaType, VideoResolution, AudioQuality, VideoFormat } from './types'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { url, setUrl, videoInfo, downloadConfig, setDownloadConfig } = useAppStore()
+
+  const { fetch: fetchInfo, isLoading: isFetchingInfo } = useVideoInfo()
+  const { start: startDownload, isLoading: isStartingDownload } = useDownload()
+  const { progress, downloadUrl, filename } = useProgress()
+
+  const handleFetch = () => {
+    if (url.trim()) {
+      fetchInfo()
+    }
+  }
+
+  const handleDownload = () => {
+    if (url.trim()) {
+      startDownload()
+    }
+  }
+
+  const isDownloading = progress?.status === 'downloading' || isStartingDownload
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="min-h-screen bg-[#0F0F0F] font-['Lato']">
+      <Header />
+      <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+        <UrlInput
+          url={url}
+          onUrlChange={setUrl}
+          onFetch={handleFetch}
+          isLoading={isFetchingInfo}
+        />
+
+        {videoInfo && (
+          <>
+            <VideoPreview videoInfo={videoInfo} />
+            <DownloadConfig
+              mediaType={downloadConfig.mediaType}
+              resolution={downloadConfig.resolution}
+              audioQuality={downloadConfig.audioQuality}
+              format={downloadConfig.format}
+              onMediaTypeChange={(v: MediaType) => setDownloadConfig({ mediaType: v })}
+              onResolutionChange={(v: VideoResolution) => setDownloadConfig({ resolution: v })}
+              onAudioQualityChange={(v: AudioQuality) => setDownloadConfig({ audioQuality: v })}
+              onFormatChange={(v: VideoFormat) => setDownloadConfig({ format: v })}
+            />
+            <DownloadProgress
+              progress={progress}
+              onDownload={handleDownload}
+              isDownloading={isDownloading}
+            />
+            <SaveButton
+              downloadUrl={downloadUrl}
+              filename={filename}
+            />
+          </>
+        )}
+      </main>
+    </div>
   )
 }
 
