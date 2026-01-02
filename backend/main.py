@@ -188,6 +188,7 @@ async def get_file(task_id: str, background_tasks: BackgroundTasks):
         path=filename,
         filename=os.path.basename(filename),
         media_type=media_type,
+        content_disposition_type="attachment",
     )
 
 
