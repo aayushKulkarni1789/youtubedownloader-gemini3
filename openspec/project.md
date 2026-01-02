@@ -4,27 +4,30 @@
 A modern, fast, and easy-to-use YouTube video downloader web application. It provides a simple interface for users to input a YouTube URL and download the video directly to their device, utilizing `yt-dlp` for efficient processing.
 
 ## Tech Stack
-- **Language:** Python 3.12+
-- **Frontend:** Streamlit
+- **Language:** Python 3.12+, TypeScript
+- **Frontend:** React 19, Vite, TailwindCSS, TanStack Query, Zustand
 - **Backend:** FastAPI, Uvicorn
 - **Core Library:** yt-dlp
-- **Package Manager:** uv
+- **Package Manager:** uv (Python), npm (Node.js)
 
 ## Project Conventions
 
 ### Code Style
 - Follow standard Python conventions (PEP 8).
 - Use type hints for function arguments and return values, especially in FastAPI endpoints.
-- Use `uv` for managing dependencies and virtual environments.
+- Use `uv` for managing Python dependencies and virtual environments.
+- Use TypeScript with strict mode for frontend code.
+- Use TailwindCSS for styling (no inline styles).
 
 ### Architecture Patterns
-- **Frontend-Backend Separation:** Streamlit app (`frontend/app.py`) communicates with the FastAPI backend (`backend/main.py`) via HTTP requests.
+- **Frontend-Backend Separation:** React app (`frontend-react/`) communicates with the FastAPI backend (`backend/main.py`) via HTTP requests through Vite proxy.
 - **Asynchronous Processing:** The backend handles video downloads asynchronously and uses background tasks for cleaning up temporary files.
 - **Temporary Storage:** Downloaded files are temporarily stored in a `downloads/` directory before being served to the user.
+- **State Management:** Zustand for global client state, TanStack Query for server state and caching.
 
 ### Testing Strategy
-- (Implicit) Use `pytest` for unit and integration tests.
-- Verify backend endpoints (`/health`, `/download`) and frontend interaction.
+- Use `pytest` for backend unit and integration tests.
+- Verify backend endpoints (`/health`, `/api/info`, `/api/download/*`) and frontend interaction.
 
 ### Git Workflow
 - Standard feature branch workflow.

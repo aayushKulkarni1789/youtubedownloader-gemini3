@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-streamlit
 yt-dlp
 requests
 pytest
