@@ -16,5 +16,8 @@ downloads/
 # session files
 session*
 
-# opencode files
-.opencode/*
+# specs tree
+specs_tree.md
+
+# .opencode files
+.opencode/
