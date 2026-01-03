@@ -12,3 +12,9 @@ test_downloads/
 
 # Downloads directory
 downloads/
+
+# session files
+session*
+
+# opencode files
+.opencode/*
