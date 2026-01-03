@@ -12,3 +12,12 @@ test_downloads/
 
 # Downloads directory
 downloads/
+
+# session files
+session*
+
+# specs tree
+specs_tree.md
+
+# .opencode files
+.opencode/

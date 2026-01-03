@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-primary: #FF0000;
+  --color-primary-hover: #CC0000;
+  --color-bg: #0F0F0F;
+  --color-surface: #1A1A1A;
+  --color-surface-hover: #252525;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #AAAAAA;
+  --font-heading: 'Oswald', sans-serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
